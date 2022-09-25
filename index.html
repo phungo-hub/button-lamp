@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let SwitchButton = function () {
+      this.setStatus = function (status="off") {
+          this.status = status;
+      }
+      this.getStatus = function () {
+          return !!this.status;
+      }
+      this.connectToLamp = function (lamp) {
+          this.lamp = lamp;
+      }
+      this.switchOff = function (lamp) {
+          if (this.status === "on") {
+              this.status = "off";
+              this.lamp.turnOff();
+          }
+      }
+      this.switchOn = function () {
+          if (this.status === "off") {
+              this.status = "on";
+              this.lamp.turnOn();
+          }
+      }
+
+  };
+
+  let ElectricLamp = function() {
+      this.turnOff = function() {
+          this.status = "off";
+      }
+      this.turnOn = function() {
+          this.status = "on";
+      }
+      this.getStatus = function() {
+          return this.status;
+      }
+  }
+
+  let switchBtn = new SwitchButton();
+  let electricLamp = new ElectricLamp();
+
+  switchBtn.setStatus("off");
+  switchBtn.connectToLamp(electricLamp);
+  switchBtn.switchOn();
+  console.log(electricLamp.getStatus());
+  switchBtn.switchOff();
+  console.log(electricLamp.getStatus());
+</script>
+</body>
+</html>
